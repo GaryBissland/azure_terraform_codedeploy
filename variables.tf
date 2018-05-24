@@ -10,12 +10,12 @@ variable "ssh_key" {
 
 variable "sampleapp_file" {
   description = "The location of the cloud init configuration file."
-  default     = "../sample_app/myapp.jar"
+  default     = "./sample_app/myapp.jar"
 }
 
 variable "storage_acc_name" {
   description = ""
-  default     = "24052018"
+  default     = "2405"
 }
 
 variable "storage_container_name" {

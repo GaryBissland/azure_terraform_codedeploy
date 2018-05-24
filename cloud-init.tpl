@@ -20,6 +20,5 @@ write_files:
       }
 runcmd:
   - cd "/home/azureuser/"
-  - echo $storage_account_name >> a.txt
-  - curl -o /home/azureuser/myapp.jar "https://$storage_account_name.blob.core.windows.net/$storage_container_name/myapp.jar"
+  - curl -o /home/azureuser/myapp.jar "https://${storage_account_name}.blob.core.windows.net/${storage_container_name}/myapp.jar"
   - java -jar -Dserver.port=8080 myapp.jar

@@ -126,7 +126,7 @@ resource "azurerm_storage_account" "mystorageaccount" {
 
 # create storage account and add jar file
 resource "azurerm_storage_account" "myapp" {
-  name                     = "${var.storage_acc_name}_${random_id.randomId.hex}"
+  name                     = "${var.storage_acc_name}${random_id.randomId.hex}"
   resource_group_name      = "${azurerm_resource_group.myterraformgroup.name}"
   location                 = "eastus"
   account_tier             = "Standard"
@@ -137,7 +137,7 @@ resource "azurerm_storage_container" "package" {
   name                  = "${var.storage_container_name}"
   resource_group_name   = "${azurerm_resource_group.myterraformgroup.name}"
   storage_account_name  = "${azurerm_storage_account.myapp.name}"
-  container_access_type = "public"
+  container_access_type = "blob"
 }
 
 resource "azurerm_storage_blob" "sblob" {
