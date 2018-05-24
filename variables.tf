@@ -14,11 +14,11 @@ variable "sampleapp_file" {
 }
 
 variable "storage_acc_name" {
-  description = ""
+  description = "Prefix for the storage account"
   default     = "2405"
 }
 
 variable "storage_container_name" {
-  description = ""
+  description = "Container for holding the application"
   default     = "package"
 }
