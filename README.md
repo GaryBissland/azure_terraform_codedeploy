@@ -11,7 +11,7 @@ https://docs.microsoft.com/en-us/azure/virtual-machines/linux/terraform-install-
 
 https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/
 
-- Add public ssh key value to default value in variable.tf
+- Add public ssh key value to default value in variables.tf
 
 ### Terraform Commands
 
