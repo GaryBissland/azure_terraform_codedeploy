@@ -117,7 +117,13 @@ Currently seems to be an issue with the second vm in the scale set, appears to b
 
 - az network public-ip show --resource-group vmssrg --name LBPublicIP
 
-## Cleanup Resources
+## Cleanup 
 
 - az group delete -n myResourceGroup
 - az group delete -n vmssrg
+
+## Resources
+
+- https://www.terraform.io/docs/providers/azurerm/r/virtual_machine_scale_set.html
+- https://docs.microsoft.com/en-us/azure/active-directory/managed-service-identity/overview
+- https://docs.microsoft.com/en-us/azure/active-directory/managed-service-identity/tutorial-linux-vm-access-storage-sas
