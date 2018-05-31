@@ -59,16 +59,16 @@ Once the terraform apply has finished you should be able to access the applicati
 
 This template does the following;
 
--deploys Spring Boot jar from the repo to a secure Azure Storage Container 
--creates a Ubuntu VM running cloud init
--enables ssh and http access
--enables Linux Managed Identity
--gives contributor role for subscription to vm principal
--installs nodejs-legacy, npm, nginx, jq, openjdk-8-jre-headless
--installs Azure Cli
--downloads jar from Azure Storage using Azure Cli SAS token
--starts java application on port 8080
--makes application available on port 80 using nginx
+- deploys Spring Boot jar from the repo to a secure Azure Storage Container 
+- creates a Ubuntu VM running cloud init
+- enables ssh and http access
+- enables Linux Managed Identity
+- gives contributor role for subscription to vm principal
+- installs nodejs-legacy, npm, nginx, jq, openjdk-8-jre-headless
+- installs Azure Cli
+- downloads jar from Azure Storage using Azure Cli SAS token
+- starts java application on port 8080
+- makes application available on port 80 using nginx
 
 To run this template;
 
