@@ -5,7 +5,6 @@ variable "cloudconfig_file" {
 
 variable "ssh_key" {
   description = "Valid SSH Key for connecting to instance"
-  default     = "XXX"
 }
 
 variable "sampleapp_file" {
