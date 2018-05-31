@@ -12,7 +12,7 @@ The pattern is an attempt to replicate functionality similar to that of AWS Code
 
 ### Setup Environment Variables
 
-The templates assume you have set environmnet variables that terraform can use to connect to Azure.
+The templates assume you have set environment variables that terraform can use to connect to Azure.
 
 Set the following variables, instructions on how to get values (https://docs.microsoft.com/en-us/azure/virtual-machines/linux/terraform-install-configure)
 
