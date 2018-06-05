@@ -2,7 +2,7 @@
 
 cd /home/azureuser
 process=$(cat "pid.file")
-kill $process
+kill "$process"
 container=$(cat "scn.txt")
 account=$(cat "san.txt")
 sas_token=$(cat "sas_token.json" | jq -r .serviceSasToken)
