@@ -57,6 +57,18 @@ resource "azurerm_storage_blob" "sblob" {
   type = "block"
 }
 
+/*upload jar file held in sample_app folder */
+resource "azurerm_storage_blob" "updateapp" {
+  name = "updateapp.jar"
+
+  resource_group_name    = "${azurerm_resource_group.vmss.name}"
+  storage_account_name   = "${azurerm_storage_account.myapp.name}"
+  storage_container_name = "${azurerm_storage_container.package.name}"
+  source                 = "${var.updateapp_file}"
+
+  type = "block"
+}
+
 /* network and load balancer */
 
 resource "azurerm_virtual_network" "vnet" {
@@ -165,7 +177,7 @@ resource "azurerm_virtual_machine_scale_set" "vmlinux" {
   name                = "${var.vmscaleset_name}"
   location            = "${var.location}"
   resource_group_name = "${azurerm_resource_group.vmss.name}"
-  upgrade_policy_mode = "Manual"
+  upgrade_policy_mode = "Automatic"
   tags                = "${var.tags}"
 
   sku {
@@ -236,6 +248,22 @@ resource "azurerm_virtual_machine_scale_set" "vmlinux" {
     type_handler_version = "1.0"
     settings             = "{\"port\": 50342}"
   }
+
+  extension {
+    name                 = "UpdateScript"
+    publisher            = "Microsoft.Azure.Extensions"
+    type                 = "CustomScript"
+    type_handler_version = "2.0"
+
+    /* //UNCOMMENT TO UPDATE APP 
+    settings = <<SETTINGS
+    {
+      "fileUris": ["${var.customscript_location}"],
+      "commandToExecute": "${var.customscript_command}" 
+    }
+    SETTINGS
+    */
+  }
 }
 
 /*give the scale set contributor role to access azure storage*/
@@ -244,7 +272,7 @@ data "azurerm_builtin_role_definition" "builtin_role_definition" {
 }
 
 locals {
-  principal_ids = "${azurerm_virtual_machine_scale_set.vmlinux.*.identity.0.principal_id}"
+  principal_ids = ["${azurerm_virtual_machine_scale_set.vmlinux.*.identity.0.principal_id}"]
 }
 
 resource "azurerm_role_assignment" "role_assignment" {

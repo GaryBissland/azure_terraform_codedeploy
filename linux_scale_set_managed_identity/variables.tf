@@ -51,6 +51,21 @@ variable "sampleapp_file" {
   default     = "../sample_app/myapp.jar"
 }
 
+variable "updateapp_file" {
+  description = "The location of the cloud init configuration file."
+  default     = "../sample_app/updateapp.jar"
+}
+
+variable "customscript_location" {
+  description = "The location of the custom upgrade script"
+  default     = "https://raw.githubusercontent.com/GaryBissland/azure_terraform_codedeploy/master/sample_app/updatefile.sh"
+}
+
+variable "customscript_command" {
+  description = "The command to run once custom script been located."
+  default     = "sh updatefile.sh"
+}
+
 variable "storage_container_name" {
   description = "Container for holding the application"
   default     = "package"
