@@ -2,7 +2,7 @@
 
 cd /home/azureuser
 container=$(< scn.txt)
-echo $container
+echo $container < ct.txt
 account=$(< san.txt)
 sas_token=$(cat sas_token.json | jq -r .serviceSasToken)
 
