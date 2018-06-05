@@ -119,7 +119,7 @@ resource "azurerm_lb_probe" "probe" {
   resource_group_name = "${azurerm_resource_group.vmss.name}"
   loadbalancer_id     = "${azurerm_lb.lb.id}"
   name                = "http-probe"
-  port                = 80
+  port                = 8080
 }
 
 resource "azurerm_lb_rule" "lbrule" {
@@ -128,7 +128,7 @@ resource "azurerm_lb_rule" "lbrule" {
   name                           = "http"
   protocol                       = "Tcp"
   frontend_port                  = 80
-  backend_port                   = 80
+  backend_port                   = 8080
   frontend_ip_configuration_name = "PublicIPAddress"
   backend_address_pool_id        = "${azurerm_lb_backend_address_pool.bpepool.id}"
   probe_id                       = "${azurerm_lb_probe.probe.id}"
@@ -255,14 +255,13 @@ resource "azurerm_virtual_machine_scale_set" "vmlinux" {
     type                 = "CustomScript"
     type_handler_version = "2.0"
 
-    /* //UNCOMMENT TO UPDATE APP 
-    settings = <<SETTINGS
-    {
-      "fileUris": ["${var.customscript_location}"],
-      "commandToExecute": "${var.customscript_command}" 
-    }
-    SETTINGS
-    */
+    //UNCOMMENT TO UPDATE APP 
+    # settings = <<SETTINGS
+    # {
+    #   "fileUris": ["${var.customscript_location}"],
+    #   "commandToExecute": "${var.customscript_command}" 
+    # }
+    # SETTINGS
   }
 }
 

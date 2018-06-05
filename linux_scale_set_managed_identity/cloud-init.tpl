@@ -1,26 +1,12 @@
 #cloud-config
 package_upgrade: true
 packages:
-  - nginx
   - nodejs-legacy
   - npm
   - openjdk-8-jre-headless
   - jq
 write_files:
   - owner: www-data:www-data
-  - path: /etc/nginx/sites-available/default
-    content: |
-      server {
-        listen 80;
-        location / {
-          proxy_pass http://localhost:8080;
-          proxy_http_version 1.1;
-          proxy_set_header Upgrade $http_upgrade;
-          proxy_set_header Connection keep-alive;
-          proxy_set_header Host $host;
-          proxy_cache_bypass $http_upgrade;
-        }
-      }
 runcmd:
   - cd "/home/azureuser/"
   - AZ_REPO=$(lsb_release -cs)
@@ -37,4 +23,4 @@ runcmd:
   - curl "https://management.azure.com/subscriptions/$subscription/resourceGroups/${resource_group_name}/providers/Microsoft.Storage/storageAccounts/${storage_account_name}/listServiceSas/?api-version=2017-06-01" -v -X POST -d "{\"canonicalizedResource\":\"/blob/${storage_account_name}/${storage_container_name}\",\"signedResource\":\"c\",\"signedPermission\":\"rcw\",\"signedProtocol\":\"https\",\"signedExpiry\":\"2019-09-22T00:06:00Z\"}" -o sas_token.json -H "Authorization:Bearer $access_token"
   - sas_token=$(cat sas_token.json | jq -r .serviceSasToken)
   - az storage blob download --container-name "${storage_container_name}" --file "./myapp.jar" --name "myapp.jar" --account-name "${storage_account_name}" --sas-token "$sas_token"
-  - java -jar -Dserver.port=8080 myapp.jar
+  - java -jar -Dserver.port=8080 myapp.jar & echo $! >> ./pid.file &
