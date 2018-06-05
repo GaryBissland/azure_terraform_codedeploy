@@ -1,5 +1,6 @@
 #!/bin/bash
 
+cd /home/azureuser
 container=$(< scn.txt)
 echo $container
 account=$(< san.txt)
